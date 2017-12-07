@@ -1,5 +1,8 @@
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class day5 {
     private static List<Integer> instructionList;
@@ -7,7 +10,7 @@ public class day5 {
 
     public static void main(String[] args) {
         try {
-            instructionList = utils.readInputAsList("day5/day5.in");
+            instructionList = utils.readInputAsList("day5/day5.in").stream().map(Integer::parseInt).collect(Collectors.toList());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.exit(1);

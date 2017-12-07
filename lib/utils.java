@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class utils {
-    public static List<Integer> readInputAsList(String file) throws FileNotFoundException {
+    public static List<String> readInputAsList(String file) throws FileNotFoundException {
         Scanner s = new Scanner(new File(file));
-        List<Integer> inputList = new ArrayList<>();
+        List<String> inputList = new ArrayList<>();
         while (s.hasNext()) {
-            inputList.add(Integer.parseInt(s.next()));
+            inputList.add(s.next());
         }
         s.close();
         return inputList;
