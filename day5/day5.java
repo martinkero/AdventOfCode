@@ -1,8 +1,5 @@
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class day5 {
     private static List<Integer> instructionList;
@@ -10,7 +7,7 @@ public class day5 {
 
     public static void main(String[] args) {
         try {
-            instructionList = readInputAsList();
+            instructionList = utils.readInputAsList("day5/day5.in");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.exit(1);
@@ -35,13 +32,5 @@ public class day5 {
         currentIndex = currentIndex + jumpValue;
     }
 
-    private static List<Integer> readInputAsList() throws FileNotFoundException {
-        Scanner s = new Scanner(new File("day5.in"));
-        List<Integer> inputList = new ArrayList<>();
-        while (s.hasNext()) {
-            inputList.add(Integer.parseInt(s.next()));
-        }
-        s.close();
-        return inputList;
-    }
+
 }
