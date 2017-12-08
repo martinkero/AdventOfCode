@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class day6 {
 
@@ -11,7 +12,7 @@ public class day6 {
             e.printStackTrace();
             System.exit(1);
         }
-        List<Integer> config = utils.stringListToIntegerList(input);
+        List<Integer> config = Arrays.stream(input.get(0).split("\\s+")).map(Integer::parseInt).collect(Collectors.toList());
 
         List<String> seenConfigs = new ArrayList<>();
         seenConfigs.add(config.toString());
