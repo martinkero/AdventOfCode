@@ -16,6 +16,32 @@ public class day7 {
         System.out.println(findRootDisc(discHierarchies));
     }
 
+    private static Map<String, List<String>> parseDiscSpecs(List<String> discSpecs) {
+        Map<String, List<String>> discs = new HashMap<>();
+        for (String discSpec : discSpecs) {
+            String mainDisc = parseMainDisc(discSpec);
+            List<String> subDiscs = parseSubDiscs(discSpec);
+            discs.put(mainDisc, subDiscs);
+        }
+        return discs;
+    }
+
+    private static String parseMainDisc(String discSpec) {
+        return discSpec.split("\\s+")[0];
+    }
+
+    private static List<String> parseSubDiscs(String discSpec) {
+        String subDiscString;
+        try {
+            subDiscString = discSpec.split("->")[1];
+        } catch (IndexOutOfBoundsException e) {
+            return new ArrayList<>();
+        }
+        String[] subDiscs = subDiscString.replaceAll("\\s+", "").split(",");
+        return Arrays.asList(subDiscs);
+    }
+
+
     private static Map<String, Integer> getDiscHierarchies(Map<String, List<String>> discs) {
         Map<String, Integer> discHierarchies = new HashMap<>();
         for (String disc : discs.keySet()) {
@@ -23,15 +49,6 @@ public class day7 {
             discHierarchies.put(disc, hierarchyValue);
         }
         return discHierarchies;
-    }
-
-    private static String findRootDisc(Map<String, Integer> discHierarchies) throws NoSuchElementException {
-        for (Map.Entry<String, Integer> discHierarchy : discHierarchies.entrySet()) {
-            if (discHierarchy.getValue() == 0) {
-                return discHierarchy.getKey();
-            }
-        }
-        throw new NoSuchElementException();
     }
 
     private static int findHierarchyValue(Map<String, List<String>> discs, String disc) {
@@ -56,28 +73,12 @@ public class day7 {
         throw new NoSuchElementException();
     }
 
-    private static Map<String, List<String>> parseDiscSpecs(List<String> discSpecs) {
-        Map<String, List<String>> discs = new HashMap<>();
-        for (String discSpec : discSpecs) {
-            String mainDisc = getMainDisc(discSpec);
-            List<String> subDiscs = getSubDiscs(discSpec);
-            discs.put(mainDisc, subDiscs);
+    private static String findRootDisc(Map<String, Integer> discHierarchies) throws NoSuchElementException {
+        for (Map.Entry<String, Integer> discHierarchy : discHierarchies.entrySet()) {
+            if (discHierarchy.getValue() == 0) {
+                return discHierarchy.getKey();
+            }
         }
-        return discs;
-    }
-
-    private static String getMainDisc(String discSpec) {
-        return discSpec.split("\\s+")[0];
-    }
-
-    private static List<String> getSubDiscs(String discSpec) {
-        String subDiscString;
-        try {
-            subDiscString = discSpec.split("->")[1];
-        } catch (IndexOutOfBoundsException e) {
-            return new ArrayList<>();
-        }
-        String[] subDiscs = subDiscString.replaceAll("\\s+", "").split(",");
-        return Arrays.asList(subDiscs);
+        throw new NoSuchElementException();
     }
 }
