@@ -1,0 +1,65 @@
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Day10 {
+    public static void main(String[] args) {
+        testKnotHash();
+
+        List<String> stringHashList = new ArrayList<>();
+        try {
+            stringHashList = utils.readInputAsList("day10/Day10.in");
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+            System.exit(1);
+        }
+        List<Integer> hashList = Arrays.stream(stringHashList.get(0).split(",")).map(Integer::parseInt).collect(Collectors.toList());
+
+        System.out.println(knotHash(0, 255, hashList));
+    }
+
+    private static int knotHash(int seqStart, int seqEnd, List<Integer> input) {
+        int skipSize = 0;
+        int currentPosition = 0;
+        List<Integer> hashList = new ArrayList<>();
+        for (int i = seqStart; i <= seqEnd; i++) {
+            hashList.add(i);
+        }
+
+        for (int i = 0; i < input.size(); i++) {
+            int length = input.get(i);
+
+            List<Integer> subList = getSublistWithWrap(hashList, currentPosition, currentPosition + length);
+            Collections.reverse(subList);
+
+            for (int j = 0; j < subList.size(); j++) {
+                hashList.set((currentPosition + j) % hashList.size(), subList.get(j));
+            }
+
+            currentPosition = (currentPosition + length + skipSize) % hashList.size();
+            skipSize++;
+        }
+
+        return hashList.get(0) * hashList.get(1);
+    }
+
+    private static List<Integer> getSublistWithWrap(List<Integer> list, int startIndex, int endIndex) {
+        List<Integer> subList = new ArrayList<>();
+        for (int i = startIndex; i < endIndex; i++) {
+            subList.add(list.get(i % list.size()));
+        }
+        return subList;
+    }
+
+    private static void testKnotHash() {
+        List<Integer> input = Arrays.asList(3, 4, 1, 5);
+        int result = knotHash(0, 4, input);
+        if (result != 12) {
+            System.out.println("Test failed, expected 12, got " + result);
+            System.exit(1);
+        }
+    }
+}
