@@ -1,6 +1,7 @@
 package main
 
 import "fmt"
+import "math"
 
 type stepper struct {
 	posX      int
@@ -28,17 +29,7 @@ func main() {
 		}
 	}
 
-	result := 0
-	if stepper.posX < 0 {
-		result -= stepper.posX
-	} else {
-		result += stepper.posX
-	}
-	if stepper.posY < 0 {
-		result -= stepper.posY
-	} else {
-		result += stepper.posY
-	}
+	result := math.Abs(float64(0-stepper.posX)) + math.Abs(float64(0-stepper.posY))
 	fmt.Println(result)
 }
 
