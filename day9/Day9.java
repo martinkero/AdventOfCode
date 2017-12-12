@@ -9,7 +9,7 @@ public class Day9 {
 
         String input = null;
         try {
-            input = utils.readInputAsList("day9/Day9.in").toString();
+            input = utils.readInputAsList("day9/Day9.in", "\n").toString();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.exit(1);

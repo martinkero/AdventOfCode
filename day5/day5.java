@@ -8,7 +8,7 @@ public class day5 {
 
     public static void main(String[] args) {
         try {
-            instructionList = utils.readInputAsList("day5/day5.in").stream().map(Integer::parseInt).collect(Collectors.toList());
+            instructionList = utils.readInputAsList("day5/day5.in", "\n").stream().map(Integer::parseInt).collect(Collectors.toList());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.exit(1);

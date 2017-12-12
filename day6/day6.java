@@ -7,7 +7,7 @@ public class day6 {
     public static void main(String[] args) {
         List<String> input = new ArrayList<>();
         try {
-            input = utils.readInputAsList("day6/day6.in");
+            input = utils.readInputAsList("day6/day6.in", "\n");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.exit(1);

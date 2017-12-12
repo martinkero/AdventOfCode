@@ -11,12 +11,12 @@ public class Day10 {
 
         List<String> stringHashList = new ArrayList<>();
         try {
-            stringHashList = utils.readInputAsList("day10/Day10.in");
+            stringHashList = utils.readInputAsList("day10/Day10.in", ",");
         } catch (FileNotFoundException e){
             e.printStackTrace();
             System.exit(1);
         }
-        List<Integer> hashList = Arrays.stream(stringHashList.get(0).split(",")).map(Integer::parseInt).collect(Collectors.toList());
+        List<Integer> hashList = stringHashList.stream().map(Integer::parseInt).collect(Collectors.toList());
 
         System.out.println(knotHash(0, 255, hashList));
     }

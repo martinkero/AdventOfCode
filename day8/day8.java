@@ -70,7 +70,7 @@ public class day8 {
         day8.testInstructions();
         List<String> rawInstructions = new ArrayList<>();
         try {
-            rawInstructions = utils.readInputAsList("day8/day8.in");
+            rawInstructions = utils.readInputAsList("day8/day8.in", "\n");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.exit(1);

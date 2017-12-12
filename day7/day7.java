@@ -5,7 +5,7 @@ public class day7 {
     public static void main(String[] args) {
         List<String> discSpecs = new ArrayList<>();
         try {
-            discSpecs = utils.readInputAsList("day7/day7.in");
+            discSpecs = utils.readInputAsList("day7/day7.in", "\n");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.exit(1);
