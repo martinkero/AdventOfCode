@@ -18,10 +18,13 @@ public class Day10 {
         }
         List<Integer> hashList = stringHashList.stream().map(Integer::parseInt).collect(Collectors.toList());
 
-        System.out.println(knotHash(0, 255, hashList));
+
+        List<Integer> hash = knotHash(0, 255, hashList);
+        int result = hash.get(0) * hash.get(1);
+        System.out.println(result);
     }
 
-    private static int knotHash(int seqStart, int seqEnd, List<Integer> input) {
+    static List<Integer> knotHash(int seqStart, int seqEnd, List<Integer> input) {
         int skipSize = 0;
         int currentPosition = 0;
         List<Integer> hashList = new ArrayList<>();
@@ -43,7 +46,7 @@ public class Day10 {
             skipSize++;
         }
 
-        return hashList.get(0) * hashList.get(1);
+        return hashList;
     }
 
     private static List<Integer> getSublistWithWrap(List<Integer> list, int startIndex, int endIndex) {
@@ -56,7 +59,8 @@ public class Day10 {
 
     private static void testKnotHash() {
         List<Integer> input = Arrays.asList(3, 4, 1, 5);
-        int result = knotHash(0, 4, input);
+        List<Integer> hash = knotHash(0, 4, input);
+        int result = hash.get(0) * hash.get(1);
         if (result != 12) {
             System.out.println("Test failed, expected 12, got " + result);
             System.exit(1);
