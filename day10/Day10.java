@@ -41,11 +41,8 @@ public class Day10 {
     private static void part2(List<String> lengths) {
         String lengthsString = String.join(",", lengths);
 
-
         System.out.println("Part2:");
         System.out.println(knotHash(lengthsString));
-
-
     }
 
     static String knotHash(String input) {
@@ -106,9 +103,7 @@ public class Day10 {
     }
 
     private static List<Integer> knot(List<Integer> hashList, List<Integer> lengths) {
-        for (int i = 0; i < lengths.size(); i++) {
-            int length = lengths.get(i);
-
+        for (Integer length : lengths) {
             List<Integer> subList = getSublistWithWrap(hashList, currentPosition, currentPosition + length);
             Collections.reverse(subList);
 
@@ -118,7 +113,6 @@ public class Day10 {
             currentPosition = (currentPosition + length + skipSize) % hashList.size();
             skipSize++;
         }
-
         return hashList;
     }
 
@@ -150,7 +144,6 @@ public class Day10 {
         inputAndExpectedResults.put("AoC 2017", "33efeb34ea91902bb2f59c9920caa6cd");
         inputAndExpectedResults.put("1,2,3", "3efbe78a8d82f29979031a4aa0b16a9d");
         inputAndExpectedResults.put("1,2,4", "63960835bcdc130f0b66d7ff4f6a5a8e");
-
         for (Map.Entry<String, String> inputAndExpectedResult : inputAndExpectedResults.entrySet()) {
             String result = knotHash(inputAndExpectedResult.getKey());
             String expectedResult = inputAndExpectedResult.getValue();
