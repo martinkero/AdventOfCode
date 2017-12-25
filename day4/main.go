@@ -1,15 +1,13 @@
 package main
 
 import (
-	"bufio"
-	"log"
-	"os"
 	"fmt"
 	"strings"
+	"../lib"
 )
 
-func main()  {
-	passphrases := readInputAsArray()
+func main() {
+	passphrases := lib.ReadInputAsArray()
 	validPassphraseCount := 0
 
 	for _, passphrase := range passphrases {
@@ -30,18 +28,4 @@ func isValidPassphrase(passphrase string) bool {
 		encounteredWords[word] = 1
 	}
 	return true
-}
-
-func readInputAsArray() []string {
-	file, err := os.Open("day4.in")
-	if err != nil {
-		log.Fatal("Error opening input file")
-	}
-	scanner := bufio.NewScanner(file)
-	var passphrases []string
-
-	for scanner.Scan() {
-		passphrases = append(passphrases, scanner.Text())
-	}
-	return passphrases
 }
