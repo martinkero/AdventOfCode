@@ -24,10 +24,10 @@ private fun part1(rows: List<String>) {
     data class Event(val date: LocalDateTime, val eventType: EVENT_TYPE, val guardID: Int)
 
     var events = mutableListOf<Event>()
-    val regex = "\\[(.*)\\] (.*(#([0-9]+)|).*)".toRegex()
+    val regex = "\\[(.*)\\] (\\D+|\\D+(\\d+)\\D+)\$".toRegex()
 
     rows.forEach {
-println(it)
+
         val matches = regex.find(it)?.groupValues
 
         if (matches != null) {
@@ -41,7 +41,6 @@ println(it)
                 else -> EVENT_TYPE.SHIFT_STARTED
             }
 
-            println(matches[1])
             val guardID = if (matches[3] == "") 0 else matches[3].toInt()
 
             events.add(Event(date, eventType, guardID))
@@ -90,9 +89,12 @@ println(it)
     var timesSlept = 0
     minutesSleptPerGuard[guardWhoSleptMost]?.forEach {
 
-        if (it.value > timesSlept) mostCommonlySleptMinute = it.key
+        if (it.value > timesSlept) {
+
+            timesSlept = it.value
+            mostCommonlySleptMinute = it.key
+        }
     }
 
-    println("$guardWhoSleptMost $mostCommonlySleptMinute")
     println("part1: " + guardWhoSleptMost * mostCommonlySleptMinute)
 }
